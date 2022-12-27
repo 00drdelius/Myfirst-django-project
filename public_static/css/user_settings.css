@@ -1,0 +1,14 @@
+.user-profiles-modify{
+    margin-right: 200px;
+    font-size: large;
+}
+
+.user-profiles-settings{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: flex-start;
+    padding: 20px 100px;
+    width: inherit;
+}
+

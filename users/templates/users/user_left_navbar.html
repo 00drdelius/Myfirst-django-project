@@ -1,0 +1,13 @@
+
+
+
+<div class="container left-container">
+    <ul class="user-brief-info">
+        <li class="user-brief-info-items user-profile"><a href="{% url 'users:Homepage' username=username %}">profile</a></li>
+        <li class="user-brief-info-items user-myvideo"><a href="{% url 'users:userVideos' username=username %}">myvideos</a></li>
+        <li class="user-brief-info-items account-settings"><a href="{% url 'users:userSettings' username=username %}">settings</a></li>
+        <li class="user-brief-info-items user-collections"><a href="#">collections</a></li>
+        <li class="user-brief-info-items user-history"><a href="#">history</a></li>
+        <li class="user-brief-info-items user-logout"><a href="{% url 'users:userLogout' %}">Logout</a></li>
+    </ul>
+</div>

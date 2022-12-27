@@ -1,0 +1,44 @@
+{% extends 'full_test_templates/base_extend.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block title %}
+    <title>{{VideoUpload}}</title>
+    {% endblock %}
+    
+    {% block css %}
+    <link rel="stylesheet" href="{% static 'css/videoUploading.css' %}">
+    {% endblock %}
+</head>
+<body>
+    {% block content %}
+<main class="content-container">
+    <div class="left-container">
+        <div class="backToIndex-button">
+        <a href="{% url 'full_test:index' %}" class="backToIndex">
+            Cancel Upload.
+        </a>
+        </div>
+    </div>
+    <div class="right-container">
+    <form class='VideoUploadForm'
+    name='UploadingVideo'
+    action="{% url 'full_test:VideoUpload' %}"
+    method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form }}
+        <button type="submit">Upload</button>
+    </form>
+    </div>
+    <script>
+        const all_labels = documents.getElementByTagName('label');
+        all_labels.style.width = '400px';
+    </script>
+</main>
+    {% endblock %}
+</body>
+</html>

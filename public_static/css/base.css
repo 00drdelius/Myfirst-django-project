@@ -1,0 +1,150 @@
+/* General layout */
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: content-box;
+    font-family: 'ZCOOL KuaiLe', cursive;
+}
+
+a{
+    text-decoration: none;
+    text-decoration-color: black;
+}
+
+li{
+    list-style: none;
+}
+
+/* Header layout*/
+.top_poster{
+    display: flex;
+    overflow: scroll;
+}
+
+/* Navigation-bar layout */
+nav{
+    display: flex;
+    justify-content: space-between;
+    border: rgba(0, 0, 0, 0.5) solid 0.2px;
+    align-items: center;
+    position: sticky;
+    top: 0px;
+    z-index: 100;
+    background-color: white;
+}
+
+/* Navigation-bar Quickmenu layout */
+.nav-quick-menu{
+    display: flex;
+    position: sticky;
+
+}
+
+.nav-quick-menu li{
+    margin: 10px 10px;
+}
+
+/* Navigation-bar Search-bar layout */
+.search-bar{
+    display: flex;
+    margin: 3px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    height: 50px;
+    width: 300px;
+}
+
+.searching-result-num{
+    height: 40px;
+    width: 100px;
+    position: relative;
+    bottom: 3px;
+}
+
+.search-box{
+    height: 40px;
+    width: 250px;
+    border-radius: 10px;
+    padding-left: 5px;
+}
+
+.search-bar button{
+    position: relative;
+    border-radius: 28px;
+    margin-left: 5px;
+    background-color:pink;
+    width: 40px;
+    height: auto;
+}
+.search-svg{
+    display: inline-block;
+    position: relative;
+    bottom: -4px;
+    height: 30px;
+    width: auto;
+}
+
+
+/* User brief profile in index */
+
+.user-brief-profile{
+    display: none;
+    position: absolute;
+    right: 300px;
+    background-color: rgb(248, 248, 248);
+    padding-left: 10px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    width: 300px;
+    height: 400px;
+    border: 1px solid whitesmoke;
+    border-radius: 50px;
+    z-index: 1;
+}
+
+
+.nav-menu-items.user-homepage:hover .user-brief-profile{
+    display: flex;
+}
+
+.user-brief-profile > *{
+    padding: 20px 0px;
+}
+
+
+.user-brief-profile .not-login-info{
+    padding: 40px;
+    background-color: blanchedalmond;
+    border: 1px whitesmoke solid;
+    border-radius: 50px;
+    width: 100%;
+    height: 100%;
+}
+
+
+
+
+.upload-button{
+    margin: 5px;
+    box-sizing:content-box;
+    width: auto;
+    padding: 8px 4px;
+    height: 100%;
+    background-color: rgba(27,243,164,0.6);
+    border-radius: 10px;
+    border:rgba(0, 0, 0, 0.2) solid 0.2px;
+    transition: 0.5s background-color linear;
+}
+.upload-button>a{
+    color: whitesmoke;
+    font-size: 20px;
+    transition: linear 0.4s color;
+}
+.upload-button:hover{
+    background-color: rgba(219,246,236,0.6);
+}
+.upload-button>a:hover{
+    color: rgba(27,243,164,0.6);
+}

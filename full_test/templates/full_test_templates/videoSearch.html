@@ -1,0 +1,46 @@
+{% extends 'full_test_templates/base_extend.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block title %}
+    <title>{{ searching.. }}</title>
+    {% endblock %}
+    {% block css %}
+    <link rel="stylesheet" href="{% static 'css/videoSearch.css' %}">
+    {% endblock %}
+</head>
+
+<body>
+    {% block content %}
+    <main>
+    {% for i in searched_items %}
+    <div class="searched-items">
+        <p>
+            {{ i.videoTitle }}
+        </p>
+        <a class="searched-items-quicklink"
+        href="{% url 'full_test:VideoPage' i.videoID.int %}" >
+        <img src="{{ i.videoPoster.url }}" alt="{{ i.videoTitle }}" 
+             width="200px" title="{{ i.videoTitle }}">
+        {% if i.videoIntroduction|length <= 30 %}
+        <p class='searched-items-intro' >
+            {{ i.videoIntroduction }}
+        </p>
+        {% else %}
+        <p class="searched-items-intro">
+            {{ i.videoIntroduction|slice:':31' }}...
+        </p>
+        {% endif %}
+        </a>
+    </div>
+    {% endfor %}
+    </main>
+    {% endblock %}
+</body>
+
+</html>

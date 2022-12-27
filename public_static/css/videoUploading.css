@@ -1,0 +1,106 @@
+/* For videoUploading HTML*/
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: content-box;
+    font-family: 'ZCOOL KuaiLe', cursive;
+}
+
+main{
+    display: flex;
+    box-sizing: content-box;
+    margin: 30px 80px;
+}
+
+.left-container{
+    display: flex;
+    justify-content: center;
+    align-content:center;
+    width: 20%;
+    border: black solid 1px;
+    margin-right: 20px;
+}
+
+.backToIndex-button{
+    position: relative;
+    margin: 20px;
+    width: 180px;
+    height: 40px;
+    background-color: pink;
+    transition: linear 0.2s background-color,
+                color 0.2s linear;
+    border-radius: 20px;
+    cursor: pointer;
+}
+.backToIndex-button>a{
+    display: inline-block;
+    padding-left: 40px;
+    padding-top: 8px;
+    position: relative;
+    color: white;
+    transition: linear 0.2s color;
+}
+
+.backToIndex-button:hover{
+    background-color: rgba(121, 81, 101, 0.4);
+}
+.backToIndex-button>a:hover{
+    color: black;
+}
+
+
+.right-container{
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+    min-height: auto;
+    border: black solid 1px;
+}
+
+.right-container form{
+    display:flex;
+    flex-direction: column;
+    align-content: center;
+    margin: 40px;
+}
+.right-container label{
+    font-size: 20px;
+    padding: 10px;
+}
+
+
+.right-container .UploadVideoTitle{
+    width: 400px;
+    height: 40px;
+    border-radius: 20px;
+    padding-left: 5px;
+    font-size: 20px;
+}
+
+.right-container .UploadVideo{
+    width: 30%;
+    height: 10%;
+    border: whitesmoke solid 2px;
+}
+
+.right-container .UploadvideoPoster{
+    height: 40px;
+}
+
+.right-container form button{
+    background-color: pink;
+    margin: 10px;
+    width: 15%;
+    height: 40px;
+    border-radius: 15px;
+    font-size: 18px;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: linear background-color 0.2s,
+                linear color 0.2s;
+}
+.right-container form button:hover{
+    background-color: rgba(121, 81, 101, 0.4);
+    color: black;
+}

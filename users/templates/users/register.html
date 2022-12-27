@@ -1,0 +1,30 @@
+{% extends 'full_test_templates/base_extend.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    {% block css %}
+    <link rel="stylesheet" href="{% static 'css/register.css' %}">
+    {% endblock %}
+</head>
+<body>
+    {% block content %}
+    <main>
+    <div class="register-box">
+        <form action="{% url 'users:userRegister' %}" method="post" class="register-form">
+            {% csrf_token %}
+            {{ form }}
+            <button type="submit" class="register-button">Register</button>
+        </form>
+        {% for message in messages %}
+        <span style="color: red;font-size: 12px;position: absolute;left: 720px;">{{ message }}</span>
+        {% endfor %}
+    </div>
+    </main>
+    {% endblock %}
+</body>
+</html>

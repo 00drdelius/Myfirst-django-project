@@ -1,0 +1,58 @@
+{% extends 'full_test_templates/base_extend.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block title %}
+    <title>My Homepage</title>
+    {% endblock %}
+    
+    {% block css %}
+    <link rel="stylesheet" href="{% static 'css/user_homepage.css' %}">
+    <link rel="stylesheet" href="{% static 'css/user_myvideos.css' %}">
+    <link rel="stylesheet" href="{% static 'css/user_collections.css' %}">
+    {% endblock %}
+</head>
+<body>
+    {% block content %}
+    <main>
+
+        {% include 'users/user_left_navbar.html' %}
+
+        <div class="container right-container user-profile">
+                <div class="user-full-info">
+                    User: 
+                    <p>{{ user_info.username }}</p>
+                    <br/>
+                    <p>
+                        Join date: {{ user_profile.created_time }}
+                    </p>
+                    <br/>
+                    Profile:
+                    <br/>
+                    <br/>
+                    <img width="200px" src="{{ user_profile.user_avatar.url }}" alt="{{ user_info.username }}">
+                    <br/>
+                    <br/>
+                    <p>
+                        My signature: {{ user_profile.user_signature }}
+                    </p>
+                </div>
+                <div class="user-myvideo">
+
+                </div>
+                <div class="history"></div>
+        </div>
+        </div>
+
+
+
+
+    </main>
+
+    {% endblock %}
+</body>
+</html>

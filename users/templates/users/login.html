@@ -1,0 +1,57 @@
+{% extends 'full_test_templates/base_extend.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block title %}
+    <title>User Login</title>
+    {% endblock %}
+    
+    {% block css %}
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+    {% endblock %}
+</head>
+<body>
+    {% block content %}
+    <main>
+    {% if request.user.is_authenticated %}
+    <!--
+        self.brief_information
+    -->
+    <a href="{% url 'users:userLogout' %}" class="logout-button"  style="margin: 20px; font-size: 20px;">
+        Logout
+    </a>
+
+
+    {% else %}
+    <div class="login-box">
+        <p style='font-size:30px; position:relative; left:-160px; color:pink; '>Login</p>
+        <form action="{% url 'users:userLogin' %}" method="post" class="login-form">
+            {% csrf_token %}
+            <!--<label for="username">Username</label>
+            <input id="username" type="text" name='username' placeholder="Your username" class="login-username" autofocus>
+            <label for="password" style="margin-top: 8px;">Password</label>
+            <input id="password" type="password" name="passoword" placeholder="Your password" class="login-password">-->
+            {{ form }}
+            <button type="submit" class="login-button">Login</button>
+        </form>
+        {% for message in messages %}
+        <span style="color: red;font-size: 12px;position: absolute;left: 720px;">{{ message }}</span>
+        {% endfor %}
+        <div>
+            Don't have any account?
+            <a class="register-redirect-button" href="{% url 'users:userRegister' %}">
+            Sign Up here!
+        </a></div>
+    </div>
+    {% endif %}
+    </main>
+
+
+    <script src="{% static 'js/login.js' %}"></script>
+    {% endblock %}
+</body>
+</html>

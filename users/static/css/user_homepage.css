@@ -1,0 +1,64 @@
+/*define the main homepage. class:left-container and user-profile*/
+
+main{
+    height: 1200px;
+    min-height: 800px;
+    display: flex;
+    flex-direction: row;
+    align-items:flex-start;
+}
+
+/*main content*/
+main .container{
+    margin: 20px 80px;
+    padding: 20px;
+    border: 2px whitesmoke solid;
+}
+
+
+/*left-container*/
+main .left-container{
+    width: 30%;
+    margin-right: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+
+main .left-container .user-brief-info{
+    display: flex;
+    flex-direction: column;
+}
+
+main .left-container .user-brief-info-items{
+    margin: 20px 0px;
+    height: 70px;
+    font-size: 20px;
+    border: solid 1px rgb(241, 132, 255);
+    background-color: rgba(255, 251, 251, 0.5);
+    transition: linear 0.2s background-color;
+}
+main .left-container .user-brief-info-items a{
+    color: violet;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+main .left-container .user-brief-info-items:hover{
+    background-color: rgba(175, 175, 175, 1.0);
+}
+
+main .right-container{
+    width: 70%;
+    margin-left: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+span .user-profiles-modify{
+    margin-left: 200px;
+}

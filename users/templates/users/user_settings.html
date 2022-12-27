@@ -1,0 +1,60 @@
+{% extends 'full_test_templates/base_extend.html' %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block title %}
+    <title>userSettings</title>
+    {% endblock %}
+
+    {% block css %}
+    <link rel="stylesheet" href="{% static 'css/user_homepage.css' %}">
+    <link rel="stylesheet" href="{% static 'css/user_settings.css' %}">
+    {% endblock %}
+</head>
+<body>
+    {% block content %}
+    <main>
+
+        {% include 'users/user_left_navbar.html' %}
+
+        <div class="container right-container user-profile">
+            <span class="user-profiles-modify">
+                Edit
+            </span>
+            <form class="user-profiles-settings" 
+            method="post" 
+            action="{% url 'users:userSettings' username %}"
+            enctype="multipart/form-data">
+            <span class="your-current-avatar">
+                <p>original avatar:</p>
+                <img src="{{ user_profile.user_avatar.url }}"
+                alt="{{ username }}"
+                width="200px">
+            </span>
+            <span>
+                <p>new avatar preview</p>
+                <img width="200px" class="new-avatar-browsing" src="" >
+            </span>
+                {% csrf_token %}
+                {{ form }}
+                <button type="submit">submit</button>
+            </form>
+        </div>
+        </div>
+    </main>
+    <script>
+        $(document).ready(function(){
+            $('.user-avatar-edit').change(function(e){
+                var URL = window.URL.createObjectURL(e.target.files[0]);
+                $('.new-avatar-browsing').attr('src', URL);
+            });
+        });
+    </script>
+    {% endblock %}
+</body>
+</html>

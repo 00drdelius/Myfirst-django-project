@@ -1,0 +1,22 @@
+a{
+    text-decoration: none;
+}
+
+li{
+    list-style: none;
+}
+
+main{
+    display: flex;
+    flex-direction: row;
+    -ms-flex-direction: row;
+    flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+}
+
+main .searched-items{
+    margin: 10px 15px;
+    padding: 2px;
+    width: 200px;
+    border: solid 1px rgba(121, 114, 114, 0.8);
+}

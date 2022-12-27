@@ -1,0 +1,53 @@
+{% extends 'full_test_templates/base_extend.html' %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block title %}
+    <title>uservideos</title>
+    {% endblock %}
+
+    {% block css %}
+    <link rel="stylesheet" href="{% static 'css/user_homepage.css' %}">
+    <link rel="stylesheet" href="{% static 'css/user_myvideos.css' %}">
+    {% endblock %}
+</head>
+<body>
+    {% block content %}
+    <main>
+
+        {% include 'users/user_left_navbar.html' %}
+
+        <div class="user-myvideo-right-container">
+            {% for i in displayed_myvideos_list %}
+            <a href="{% url 'full_test:VideoPage' i.videoID.int %}"
+            class="single-myvideo-link">
+            <div class="single-displayed-myvideo">
+                    <img width="200px"
+                    src="{{ i.videoPoster.url }}"
+                    alt="{{ i.videoTitle }}">
+                    <div class="displayed-video-profile">
+                        <p class="single-myvideo-videltitle">
+                            {{ i.videoTitle }}
+                        </p>
+                        <p class="single-myvideo-videointro">
+                            {{ i.videoIntroduction }}
+                        </p>
+                        <p class="single-myvideo-uploaded-time">
+                            {{ i.uploadTime }}
+                        </p>
+                    </div>
+            </div>
+            </a>
+            {% endfor %}
+        </div>
+    </main>
+    <script>
+    </script>
+    {% endblock %}
+</body>
+</html>

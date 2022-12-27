@@ -1,0 +1,114 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block title %}
+    <title>base_extending_html</title>
+    {% endblock %}
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+   <link rel="shortcut icon" href="{% static 'medias/favicon.ico' %}" type="image/x-icon">
+    {% block css %}
+
+    {% endblock %}
+
+</head>
+<body>
+    <script  src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <header class='top_poster'>
+        <video height="auto" autoplay muted loop>
+            <source src="{% static 'medias/top_poster.webm' %}" type="video/webm">
+        </video>
+    </header>
+    <nav class="nav-bar">
+        <ul class="nav-quick-menu">
+            <li class="nav-menu-items"><a href="{% url 'full_test:index' %}">Index</a></li>
+            <li class="nav-menu-items"><a href="#">B AREA</a></li>
+            <li class="nav-menu-items"><a href="#">C REGION</a></li>
+            <li class="nav-menu-items"><a href="#">D SOURCE</a></li>
+            <li class="nav-menu-items"><a href="#">E FUNCTIONS</a></li>
+        </ul>
+        <div class="searching-result-num">
+        <!-- ajax-showing-result -->
+        </div>
+
+
+        <form action="{% url 'full_test:searchByGet' %}" 
+        method="get" class="search-bar">
+            <input autofocus name="search-box" 
+            type="search" class="search-box" 
+            placeholder="Seach here!">
+            <button type="submit"><span class="search-svg">
+                <img src="{% static 'medias/search_mark.svg' %}" 
+                alt="Question mark">
+            </span></button>
+        </form>
+
+
+        {% if request.user.is_authenticated %}
+        <ul class="nav-quick-menu">
+            <li class="nav-menu-items user-homepage">
+                <a href="{% url 'users:Homepage' request.user.username %}" class='user-profile-display-button' >User</a>
+                
+                <div class="user-brief-profile">
+                    <p class="user-brief-profile-username">{{ username }}</p>
+                    <img class="user-brief-profile-userprofile" width="60px" src="{{ user_profile.user_avatar.url }}" alt="{{ username }}'s profile ">
+                    <p class="user-brief-profile-usersignature">{{ user_profile.user_signature }}</p>
+                    <a class="user-brief-profile-userlogout" href="{% url 'users:userLogout' %}">
+                        Logout
+                    </a>
+                </div>
+                
+            </li>
+            <li class="nav-menu-items"><a href="#">Activity</a></li>
+            <li class="nav-menu-items"><a href="#">Message</a></li>
+
+            <li class="nav-menu-items">
+                <a href="#">History</a>
+                <div class="user-brief-history">
+                    
+                </div>
+            </li>
+
+            <li class="nav-menu-items"><a href="#">Collection</a></li>
+        </ul>
+        <span class="upload-button">
+            <a href="{% url 'full_test:VideoUpload' %}">
+                Contribute
+            </a></span>
+
+        {% else %}
+
+        <ul class="nav-quick-menu">
+            <li class="nav-menu-items user-homepage">
+                <a href="{% url 'users:userLogin' %}" class='user-profile-display-button' >User</a>
+                
+                <div class="user-brief-profile not-login">
+                    <p class="not-login-info">
+                        You haven't Logined yet.
+                    </p>
+                </div>
+                
+            </li>
+            <li class="nav-menu-items"><a href="#">Activity</a></li>
+            <li class="nav-menu-items"><a href="#">Message</a></li>
+            <li class="nav-menu-items"><a href="#">History</a></li>
+            <li class="nav-menu-items"><a href="#">Collection</a></li>
+        </ul>
+        <span class="upload-button">
+            <a href="{% url 'users:userLogin' %}">
+                Contribute
+            </a></span>
+        {% endif %}
+    </nav>
+    {% block content %}
+
+
+    {% endblock %}
+    <script type="text/javascript " src="{% static 'js/ajax.js' %}" ></script>    
+    <script src="{% static 'js/base_extend.js' %}"></script>
+</body>
+</html>

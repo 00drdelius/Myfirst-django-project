@@ -1,0 +1,144 @@
+{% extends 'full_test_templates/base_extend.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block title %}
+    <title>{{ VideoPage }}</title>
+    {% endblock%}
+    
+    {% block css %}
+    <link rel="stylesheet" href="{% static 'css/videoPage.css' %}">
+    {% endblock %}
+</head>
+<body>
+    {% block content %}
+    <main>
+    <div class="left-container">
+        <!--Empty-->
+    </div>
+    <div class="mid-container">
+        <div class="video-top-info">
+            <p class="videoTitle">{{ video_displayed.videoTitle }}</p>
+            <p class="video-created-time"><strong> created-time:</strong>{{ video_displayed.uploadTime }}</p>
+        </div>
+        <video controls preload class="video-player" width="90%" style="padding-left: 20px; position: none;">
+            <source src='{{ video_displayed.video.url }}' type="video/mp4">
+            <source src='{{ video_displayed.video.url }}' type="video/webm">
+            
+            Sorry, your browser doesn't support embedded videos. 
+        </video>
+        </br>
+        <p style="padding-left: 8px;">video introduction:</p>
+        <div class="videoIntro">
+            {{ video_displayed.videoIntroduction }}
+        </div>
+
+        <div class="comment-area">
+            <div class="user-comment-display-area">
+            <!--Displayed by ajax.type == 'GET'-->
+            </div>
+
+        
+            {% if user.is_authenticated %}
+            <div class="comment-area-user-profile">
+                <img width="50px" src="{{ user_profile.user_avatar.url }}" alt="{{ username }}" class="videopage-comment-area-user-avartar">
+                <div class="videopage-comment-area-username">
+                    <p class="videopage-comment-area-username">{{ username }}</p>
+                </div>
+            </div>
+            <div class="user-comment-text user-login">
+                <div class="user-comment-textform">
+                    {{ commentform }}
+                <button type="submit" class="comment-submit-button">Submit</button>
+                </div>
+            </div>
+            {% else %}
+            <div class="user-comment-text user-not-login">
+                <div class="not-login-rendered-form">
+                    {{ commentform }}
+                </div>
+            </div>
+            {% endif %}
+        </div>
+
+    </div>
+
+
+    <div class="right-container">
+        <div class="videopage-user-profile">
+            <img width="50px" src="{{ user_profile.user_avatar.url }}" alt="{{ username }}" class="videopage-user-avartar">
+            <div class="videopage-user-text">
+                <p class="videopage-username">{{ username }}</p>
+                <p class="videopage-user-signature">{{ user_profile.user_signature }}</p>
+            </div>
+        </div>
+    {% for i in other_videos %}
+        <div class="more-videos">
+            <a href="{% url 'full_test:VideoPage' i.videoID.int %}" class="other-video-quicklink">
+                <img width="35%" src="{{ i.videoPoster.url }}" alt="{{ i.videoTitle }}" style="margin: 5px 0px; padding-left: -20px;">
+                <div class="video-brief">
+                    <p class="other-video-title">
+                        {{ i.videoTitle }}
+                    </p>
+                    {% if i.videoIntroduction.length <= 20 %}
+                    <p class="videoIntroduction">
+                        {{ i.videoIntroduction }}
+                    </p>
+                    {% else %}
+                    <p class="videoIntroduction">
+                        {{ i.videoIntroduction|slice:'21' }}...
+                    </p>
+                    {% endif %}
+                </div>
+            </a>
+        </div>
+    {% endfor %}
+    </div>
+    </main>
+    <script >
+        function getComment(){
+    $(document).ready(function(){
+        $.ajax({
+            url:"{% url 'full_test:ajax_getComment' id=video_displayed.videoID.int %}",
+            type:'GET',
+            success:function(data){
+                $('.user-comment-display-area').html(data);
+            },
+            error:function(data){
+                console.log('ajax_getComment failed');
+            },
+        });
+    });
+};
+getComment();  /* render the comments as long as the DOM tree loaded. */
+$('.comment-submit-button').click(function(){
+    if($('.your-comment-place').val()){
+        $.ajax({
+            url:"{% url 'full_test:ajax_comment' id=video_displayed.videoID.int %}",
+            /*url:'ajax/comment/',*/
+            type:'POST',
+            dataType:'json',
+            data:{
+                csrfmiddlewaretoken: '{{ csrf_token }}',
+                'user_comment': $('.your-comment-place').val(),
+            },
+            beforeSend:function(){
+                console.log('ready to send to url ajax_comment');
+            },
+            success:function(data){
+                console.log('comment_ajax request succeed!');
+                if(data.status =='success'){
+                    getComment();
+                };
+            },
+        });
+    };
+});
+    </script>
+    {% endblock %}
+</body>
+</html>
